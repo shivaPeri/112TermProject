@@ -642,11 +642,13 @@ class FourierMode(Mode):
         mode.drawPaths = []
         mode.file = mode.app.fourierFile
         mode.fourierObject = None
+        mode.pathlength = 200
 
         if mode.file != None:
+            
             svgPaths = getSvgPath(mode.file)
             for path in svgPaths:
-                mode.drawPaths.append(svgToPath(200, path, 1/50))
+                mode.drawPaths.append(svgToPath(mode.pathlength, path, 1/50))
 
             mode.fourierObject = Fourier(mode.drawPaths[0], mode.width/2, mode.height/2)
 
@@ -691,10 +693,11 @@ class FourierMode(Mode):
     def drawPath(mode, canvas):
         if len(mode.path) > 1:
             for i in range(1, len(mode.path)):
-                prev = mode.path[i-1]
-                cur = mode.path[i]
-                canvas.create_line(prev[0], prev[1], cur[0], cur[1], fill= mode.app.pen.color, width= mode.app.pen.size)
-                #drawCircle(canvas, prev[0], prev[1], mode.app.pen.size/2, mode.app.pen.color)  
+                if i % mode.pathlength != 0:
+                    prev = mode.path[i-1]
+                    cur = mode.path[i]
+                    canvas.create_line(prev[0], prev[1], cur[0], cur[1], fill= mode.app.pen.color, width= mode.app.pen.size)
+                    #drawCircle(canvas, prev[0], prev[1], mode.app.pen.size/2, mode.app.pen.color)  
 
 
     def keyPressed(mode, event):
