@@ -1,7 +1,6 @@
 
 ######## 15-112 Term Project
 ######## Shiva Peri
-# I made a change
 
 import math, random, string, copy, os, json, numpy
 
@@ -696,12 +695,6 @@ class FourierMode(Mode):
                 cur = mode.path[i]
                 canvas.create_line(prev[0], prev[1], cur[0], cur[1], fill= mode.app.pen.color, width= mode.app.pen.size)
                 #drawCircle(canvas, prev[0], prev[1], mode.app.pen.size/2, mode.app.pen.color)  
-
-
-
-    def isComplete(mode, x, y):
-        wheel = mode.wheel[-1]
-        return distance(wheel.cx, wheel.cy, x, y) < 10**-1
 
 
     def keyPressed(mode, event):
